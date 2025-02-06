@@ -47,10 +47,12 @@ void Port2_Init(void){
   // Use the port direction register to configure pins as inputs and output
   // 	-A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
   // 	-A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
-    P2DIR |= 0x07;
+    P2DIR |= 0xC7;
   // Use the resistor enable register to enable resistors for inputs that need them
   // Use the port output register to configure the resistors as pull-ups or pull-downs
   // Use the PxSEL0 and PxSEL1 registers to enable alternate pin functions, if applicable
+    P2SEL0 |= 0xC0;
+    P2SEL1 &= ~0xC0;
   // Use the port output register to put outputs to an initial state
     P2OUT &= 0x00;
 }
@@ -67,10 +69,12 @@ void Port3_Init(void){
   // Use the port direction register to configure pins as inputs and output
   // 	-A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
   // 	-A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
+    P3DIR |= 0xC0; 
   // Use the resistor enable register to enable resistors for inputs that need them
   // Use the port output register to configure the resistors as pull-ups or pull-downs
   // Use the PxSEL0 and PxSEL1 registers to enable alternate pin functions, if applicable
   // Use the port output register to put outputs to an initial state
+    P3OUT &= ~0xC0;
 }
 
 // ------------Port4_Init------------
@@ -103,10 +107,12 @@ void Port5_Init(void){
   // Use the port direction register to configure pins as inputs and output
   // 	-A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
   // 	-A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
+    P5DIR |= 0x30;
   // Use the resistor enable register to enable resistors for inputs that need them
   // Use the port output register to configure the resistors as pull-ups or pull-downs
   // Use the PxSEL0 and PxSEL1 registers to enable alternate pin functions, if applicable
   // Use the port output register to put outputs to an initial state
+    P5OUT &= ~0x30;
 }
 
 // ------------Port6_Init------------

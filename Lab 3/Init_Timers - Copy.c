@@ -27,14 +27,18 @@ void TimerA0_Init(void){
   // 	Disable timer for initialization
   // 	Choose a clock source
   // 	Select a clock scaler if needed
-  //    Enable overflow interrupt if needed
+  //    Enable overflow interrupt if needed  
+      TA0CTL |= 0x0280;
   // In the TA0EX0 register:
   //    Select a second clock scaler if needed
   // For EACH CCRn being used, in the TA0CCTLn register
   // 	set the PWM outmode if needed
   //    Enable the CCRn match interrupt if needed
-  // For PWM, Load TA0CCR0 with clock
+      TA0CCTL3 |=0x00E0;
+      TA0CCTL4 |=0x00E0;
+  // For PWM, Load TA0CCR0 with clock:
   //	counts for desired period
+      TA0CCR0 =29999;
 }
 
 // ------------TimerA1_Init------------
