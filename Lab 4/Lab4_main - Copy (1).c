@@ -46,7 +46,9 @@ void Servo(uint16_t angle_count);
 void ServoInit(void)  //This function initializes the servo to be centered (0 degrees)
 {
      //call Servo() function to center servo
+     Servo;
      //delay here to give servo time to move - can use built in timer function
+     Clock_Delay1ms(20);
      //stop the timer
      return;
 }
@@ -55,8 +57,11 @@ void Servo(uint16_t angle_count) // this function moves the servo.
 //desired pulse width in the PWM signal (1-2 ms)
 {
     //set period for 20ms
+        TA3CCR0 = 59999;
     //set high time for the input angle using angle_count
+        TA3CCR3 = angle_count;
     //set timer for up mode
+        TA3CTL = 0x0290;
     return;
 }
 

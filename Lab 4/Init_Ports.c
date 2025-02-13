@@ -181,10 +181,12 @@ void Port9_Init(void){
   // Use the port direction register to configure pins as inputs and output
   // 	-A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
   // 	-A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
+  P9DIR |=0x04;
   // Use the resistor enable register to enable resistors for inputs that need them
   // Use the port output register to configure the resistors as pull-ups or pull-downs
   // Use the PxSEL0 and PxSEL1 registers to enable alternate pin functions, if applicable
   // Use the port output register to put outputs to an initial state
+  P9OUT &= 0x00;
 }
 
 // ------------Port10_Init------------

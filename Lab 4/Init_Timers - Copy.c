@@ -101,11 +101,15 @@ void TimerA3_Init(void){
   // 	Choose a clock source
   // 	Select a clock scaler if needed
   //    Enable overflow interrupt if needed
+        TA3CTL |= 0x0280;
   // In the TA3EX0 register:
   //    Select a second clock scaler if needed
   // For EACH CCRn being used, in the TA3CCTLn register
   // 	set the PWM outmode if needed
+            TA3CCTL3 |=0x00E0;
   //    Enable the CCRn match interrupt if needed
   // For PWM, Load TA3CCR0 with clock
   //	counts for desired period
+  TA3CCR0 = 59999;
+  TA3CCR3 = 4500;
 }
