@@ -34,8 +34,8 @@ void TimerA0_Init(void){
   // For EACH CCRn being used, in the TA0CCTLn register
   // 	set the PWM outmode if needed
   //    Enable the CCRn match interrupt if needed
-      TA0CCTL3 |=0x00E0;
-      TA0CCTL4 |=0x00E0;
+      TA0CCTL3 |=0x00C0; 
+      TA0CCTL4 |=0x00C0;
   // For PWM, Load TA0CCR0 with clock:
   //	counts for desired period
       TA0CCR0 =29999;

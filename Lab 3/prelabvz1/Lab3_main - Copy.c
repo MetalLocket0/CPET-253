@@ -51,74 +51,31 @@ void main(void)
        WDT_A->CTL = WDT_A_CTL_PW | WDT_A_CTL_HOLD;     // stop watchdog timer
        Clock_Init48MHz();  // makes bus clock 48 MHz
        //Call the appropriate functions from Init_Ports.c
-       Port2_Init();
-       Port3_Init();
-       Port5_Init();
        //Call the appropriate functions from Init_Timers.c
-       TimerA0_Init();
        //These are the four states of the state machine
-       enum motor_states {drive_forward,turn_right,turn_left,drive_backward, } state,prevState;
+       enum motor_states {
 
-       state = drive_forward;                   //start state
-       prevState = !drive_forward;               //used to know when the state has changed
+       state =                    //start state
+       prevState =                //used to know when the state has changed
        uint16_t stateTimer;       //used to stay in a state
        bool isNewState;           //true when the state has switched
 
-
-
-
+       
        while(1)
-
        {
-            isNewState = (state != prevState);
+           isNewState = (state != prevState);
            prevState = state;  //save state for next time
 
           switch (state) {
           //each case below should have entry housekeeping, state business and exit housekeeping
           //remember to reset the stateTimer each time you enter a new state
           //you must assign a new state when stateTimer reaches the correct value
-          case drive_forward:
-              if (isNewState){
-              stateTimer = 0;
-              Motor_Forward(7599, 7599);
-              }
-              stateTimer++;
-              if (stateTimer >= 100){
-                  state = turn_right;
-              }
+          case
                   break;
-          case turn_right:
-              if (isNewState){
-              stateTimer = 0;
-              Motor_Right(7599, 7599);
-              }
-              stateTimer++;
-              if (stateTimer >= 100){
-                  state = turn_left;
-              }
+          case
                   break;
-          case turn_left:
-              if (isNewState){
-              stateTimer = 0;
-              Motor_Left(7599, 7599);
-              }
-              stateTimer++;
-              if (stateTimer >= 100){
-                  state = drive_backward;
-              }
-                  break;
-          case drive_backward:
-              if (isNewState){
-              stateTimer = 0;
-              Motor_Backward(7599, 7599);
-              }
-              stateTimer++;
-              if (stateTimer >= 100){
-                  state = drive_forward;
-              }
-                  break;
-          } //switch
 
+          } //switch
           Clock_Delay1ms(10);  //10ms delay so that each increment of statetimer is 10ms
        } //while(1)
    } //main()
