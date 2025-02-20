@@ -46,7 +46,7 @@ void Servo(uint16_t angle_count);
 void ServoInit(void)  //This function initializes the servo to be centered (0 degrees)
 {
      //call Servo() function to center servo
-     Servo;
+     Servo();
      //delay here to give servo time to move - can use built in timer function
      Clock_Delay1ms(20);
      //stop the timer
