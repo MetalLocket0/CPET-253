@@ -62,22 +62,35 @@ uint32_t pulseIn (void);
 
 void ServoInit(void)  //This function initializes the servo to be centered (0 degrees)
 {
-     //copy this from Lab 4
+     //call Servo() function to center servo
+     Servo();
+     //delay here to give servo time to move - can use built in timer function
+     Clock_Delay1ms(20);
+     //stop the timer
+     return;
 }
 void Servo(uint16_t angle_count) // this function moves the servo.
 //input: angle_count should be in terms of clock counts to create the 
 //desired pulse width in the PWM signal
 {
-    //copy this from Lab 4
+    //set period for 20ms
+    TA3CCR0 = 59999;
+    //set high time for the input angle using angle_count
+        TA3CCR3 = angle_count;
+    //set timer for up mode
+        TA3CTL = 0x0290;
+    return;
 }
 uint16_t distanceInCm(void) {  //this function measures and returns the distance to the nearest object
     uint16_t distance;
 
-    //drive trigger pin high
-    //wait 10 us - can use built-in timer function
-    //drive trigger pin low
-    //calculate distance using s=t * 0.034/2. t comes from pulseIn() function
+    P6OUT |= TRIGGER; //drive trigger pin high
+    Clock_Delay1us(10);//wait 10 us - can use built-in timer function
+    P6OUT &= ~TRIGGER; //drive trigger pin low
+    uint32_t pulseWidth = pulseIn(); //calculate distance using s=t * 0.034/2. t comes from pulseIn() function
     // if no echo (distance = 0), assume object is at farthest distance
+    if (pulseWidth == 0) {
+        return 400;
     //return the distance
 }
 uint32_t pulseIn (void)  //this function returns the width of the return pulse
@@ -87,20 +100,26 @@ uint32_t pulseIn (void)  //this function returns the width of the return pulse
     uint16_t time = 0;    //the result of converting clock counts to microseconds
     uint16_t maxcount = 56999;  //max count for 38 ms (timeout)
 
-    //set timer for continuous mode
+    TA2CTL |= MC_2; //set timer for continuous mode
 
-    //reset the count register
+    TA2R = 0;//reset the count register
     //wait for the pulse to start (while Echo is low)
     //if count is greater than maxcount return 0
+    while (!(P6IN & ECHO)) {  
+        if (TA2R > maxcount) return 0; 
+    }
 
-    //reset the count register
+    TA2R = 0; //reset the count register
     //wait for the pulse to finish (while Echo is high)
     //if count is greater than maxcount return 0
-
-    //read the count (width of the return pulse)
-    //stop the timer
+    while (P6IN & ECHO) {  
+        if (TA2R > maxcount) return 0;  
+    }
+    width = TA2R; //read the count (width of the return pulse)
+    TA2CTL = 0;//stop the timer
     //convert the reading to microseconds.
     //return the microsecond reading
+    return clockCyclesToMicroseconds(width);
 }
 
 void main(void)
@@ -111,11 +130,17 @@ void main(void)
 	WDT_A->CTL = WDT_A_CTL_PW | WDT_A_CTL_HOLD;		// stop watchdog timer
 	Clock_Init48MHz();  // makes bus clock 48 MHz
 	//call all the port initialization functions
-
+    Port2_Init();
+    Port3_Init();
+    Port5_Init();
+    Port6_Init();
+    Port9_Init();
 	//call all the timer initialization functions
-	
+    TimerA0_Init();
+    TimerA3_Init();
+    TimerA2_Init();
 	//center the servo using the ServoInit() function
-
+    ServoInit();
 	//These are the states of the state machine
 	
 	state = FORWARD;          //start in FORWARD state

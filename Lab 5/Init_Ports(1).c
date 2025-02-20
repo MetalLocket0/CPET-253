@@ -129,6 +129,14 @@ void Port6_Init(void){
   // 	-A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
   // Use the resistor enable register to enable resistors for inputs that need them
   // Use the port output register to configure the resistors as pull-ups or pull-downs
+  P6DIR |= BIT2;    
+    P6DIR &= ~BIT3;  
+    
+    P6SEL0 &= ~(BIT2 | BIT3); 
+    P6SEL1 &= ~(BIT2 | BIT3);
+    
+    P6REN |= BIT3;    
+    P6OUT &= ~BIT2;  
   // Use the PxSEL0 and PxSEL1 registers to enable alternate pin functions, if applicable
   // Use the port output register to put outputs to an initial state
 }
