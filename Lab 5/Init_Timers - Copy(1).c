@@ -82,7 +82,7 @@ void TimerA2_Init(void){
   //    Select a second clock scaler if needed
   // For EACH CCRn being used, in the TA2CCTLn register
   // 	set the PWM outmode if needed
-    TA2CTL = TASSEL_2 | ID_3 | MC_2 | TACLR; 
+    TA2CTL = TASSEL_2 | ID_3 | MC_2; 
     TA2EX0 = 0; 
   //    Enable the CCRn match interrupt if needed
   // For PWM, Load TA2CCR0 with clock
