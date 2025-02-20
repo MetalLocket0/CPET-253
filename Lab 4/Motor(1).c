@@ -36,7 +36,7 @@ void Motor_Stop(void){
     TA0R = 0;                  //counter, start at zero once turned on
     TA0CCR3  = 0;      //right side high time goes in Capture/compare unit 3
     TA0CCR4  = 0;       //left side high time goes in Capture/compare unit 4
-	
+
     TA0CTL  |= 0x0010;         // start counting by setting mode to UP
     return;
 }
@@ -58,14 +58,14 @@ void Motor_Forward(volatile uint16_t rightDuty, volatile uint16_t leftDuty ){
 
     P5OUT &= ~RIGHT_MOT_DIR;   //set right motor in forward direction
     P5OUT &= ~LEFT_MOT_DIR;    //set left motor in forward direction
-	
-	//No need to drive P2OUT since Timer will drive it directly 
-	//This is configured via the PxSEL bits
+
+    //No need to drive P2OUT since Timer will drive it directly
+    //This is configured via the PxSEL bits
 
     TA0R = 0;                  //counter, start at zero once turned on
     TA0CCR3  = rightDuty;      //right side high time goes in Capture/compare unit 3
     TA0CCR4  = leftDuty;       //left side high time goes in Capture/compare unit 4
-	
+
     TA0CTL  |= 0x0010;         // start counting by setting mode to UP
     return;
   }
@@ -85,8 +85,8 @@ void Motor_Right(uint16_t rightDuty, uint16_t leftDuty){
 
     P5OUT &= ~LEFT_MOT_DIR;    //set left motor in forward direction
     P5OUT &= ~RIGHT_MOT_DIR;   //set right motor in forward direction//
-	//No need to drive P2OUT since Timer will drive it directly 
-	//This is configured via the PxSEL bits
+    //No need to drive P2OUT since Timer will drive it directly
+    //This is configured via the PxSEL bits
 
     TA0R = 0;                  //counter, start at zero once turned on
     TA0CCR4  = leftDuty;       //left side high time goes in Capture/compare unit 4
@@ -113,8 +113,8 @@ void Motor_Left(uint16_t rightDuty, uint16_t leftDuty){
 
     P5OUT &= ~RIGHT_MOT_DIR;   //set right motor in forward direction
     P5OUT &= ~LEFT_MOT_DIR;    //set left motor in forward direction
-	//No need to drive P2OUT since Timer will drive it directly 
-	//This is configured via the PxSEL bits
+    //No need to drive P2OUT since Timer will drive it directly
+    //This is configured via the PxSEL bits
 
     TA0R = 0;                  //counter, start at zero once turned on
     TA0CCR3  = rightDuty;      //right side high time goes in Capture/compare unit 3
@@ -139,14 +139,14 @@ void Motor_Backward(uint16_t rightDuty, uint16_t leftDuty){
 
     P5OUT |= RIGHT_MOT_DIR;   //set right motor
     P5OUT |= LEFT_MOT_DIR;    //set left motor
-	
-	//No need to drive P2OUT since Timer will drive it directly 
-	//This is configured via the PxSEL bits
+
+    //No need to drive P2OUT since Timer will drive it directly
+    //This is configured via the PxSEL bits
 
     TA0R = 0;                  //counter, start at zero once turned on
     TA0CCR3  = rightDuty;      //right side high time goes in Capture/compare unit 3
     TA0CCR4  = leftDuty;       //left side high time goes in Capture/compare unit 4
-	
+
     TA0CTL  |= 0x0010;         // start counting by setting mode to UP
     return;
 }

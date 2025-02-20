@@ -46,7 +46,7 @@ void Servo(uint16_t angle_count);
 void ServoInit(void)  //This function initializes the servo to be centered (0 degrees)
 {
      //call Servo() function to center servo
-     Servo();
+     Servo(4500);
      //delay here to give servo time to move - can use built in timer function
      Clock_Delay1ms(20);
      //stop the timer
@@ -68,45 +68,45 @@ void Servo(uint16_t angle_count) // this function moves the servo.
 void main(void)
 {
 
-	WDT_A->CTL = WDT_A_CTL_PW | WDT_A_CTL_HOLD;		// stop watchdog timer
-	Clock_Init48MHz();  // makes bus clock 48 MHz
-	//call all the port initialization functions
+    WDT_A->CTL = WDT_A_CTL_PW | WDT_A_CTL_HOLD;     // stop watchdog timer
+    Clock_Init48MHz();  // makes bus clock 48 MHz
+    //call all the port initialization functions
     Port2_Init();
     Port3_Init();
     Port5_Init();
     Port9_Init();
-	//call all the timer initialization functions
+    //call all the timer initialization functions
     TimerA0_Init();
     TimerA3_Init();
-	//center the servo using the ServoInit() function
-	//These are the states of the state machine
-	enum motor_states {forward,backward,turn_right,sweep_right,sweep_left} state, prevState;
+    //center the servo using the ServoInit() function
+    //These are the states of the state machine
+    enum motor_states {forward,backward,turn_right,sweep_right,sweep_left} state, prevState;
 
-	state = FORWARD;          //start in FORWARD state
-	prevState = !FORWARD;   //used to know when the state has changed
-	uint16_t stateTimer = 0;           //used to stay in a state
-	bool isNewState;              //true when the state has switched
+    state = forward;          //start in FORWARD state
+    prevState = !forward;   //used to know when the state has changed
+    uint16_t stateTimer = 0;           //used to stay in a state
+    bool isNewState;              //true when the state has switched
 
 
-	while(1) {
+    while(1) {
 
-	    isNewState = (state != prevState);
+        isNewState = (state != prevState);
             prevState = state;
-	    
-	    switch (state) {
+
+        switch (state) {
 
         case forward:
         if (isNewState){
             stateTimer = 0;
             Motor_Forward(7599,7599);
         }
-	    stateTimer++;
+        stateTimer++;
         if (stateTimer >= 100)
         {
             state = backward;
         }
         break;
-       
+
         case backward:
         if (isNewState){
             stateTimer = 0;
@@ -122,24 +122,24 @@ void main(void)
         case sweep_right:
         if (isNewState){
             stateTimer = 0;
-            Motor_Stop(0,0);
-            Servo(5999);
+            Motor_Stop();
+            Servo(1999);
         }
         stateTimer++;
-        if (stateTimer >= 2)
+        if (stateTimer >= 100)
         {
             state = sweep_left;
         }
         break;
 
-	     case sweep_left:
+         case sweep_left:
         if (isNewState){
             stateTimer = 0;
-            Motor_Stop(0,0);
-            Servo(12000);
+            Motor_Stop();
+            Servo(6999);
         }
         stateTimer++;
-        if (stateTimer >= 3)
+        if (stateTimer >= 100)
         {
             state = turn_right;
         }
@@ -149,14 +149,15 @@ void main(void)
         if (isNewState){
             stateTimer = 0;
             Motor_Right(7599,7599);
+            Servo(4500);
         }
         stateTimer++;
         if (stateTimer >= 200)
         {
-            state = turn_right;
+            state = forward;
         }
         break;
-	    } //switch 
+        } //switch
         Clock_Delay1ms(10);
-	}  //while
+    }  //while
 }

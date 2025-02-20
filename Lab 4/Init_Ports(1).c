@@ -24,8 +24,8 @@ The initializations will be different for each lab.
 // Output: none
 void Port1_Init(void){
   // Use the port direction register to configure pins as inputs and output
-  // 	-A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
-  // 	-A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
+  //    -A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
+  //    -A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
     P1DIR &= ~0x12;
   // Use the resistor enable register to enable resistors for inputs that need them
     P1REN |= 0x12;
@@ -45,8 +45,8 @@ void Port1_Init(void){
 // Output: none
 void Port2_Init(void){
   // Use the port direction register to configure pins as inputs and output
-  // 	-A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
-  // 	-A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
+  //    -A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
+  //    -A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
     P2DIR |= 0xC7;
   // Use the resistor enable register to enable resistors for inputs that need them
   // Use the port output register to configure the resistors as pull-ups or pull-downs
@@ -67,8 +67,8 @@ void Port2_Init(void){
 // Output: none
 void Port3_Init(void){
   // Use the port direction register to configure pins as inputs and output
-  // 	-A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
-  // 	-A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
+  //    -A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
+  //    -A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
     P3DIR |= 0xC0; 
   // Use the resistor enable register to enable resistors for inputs that need them
   // Use the port output register to configure the resistors as pull-ups or pull-downs
@@ -87,8 +87,8 @@ void Port3_Init(void){
 // Output: none
 void Port4_Init(void){
   // Use the port direction register to configure pins as inputs and output
-  // 	-A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
-  // 	-A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
+  //    -A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
+  //    -A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
   // Use the resistor enable register to enable resistors for inputs that need them
   // Use the port output register to configure the resistors as pull-ups or pull-downs
   // Use the PxSEL0 and PxSEL1 registers to enable alternate pin functions, if applicable
@@ -105,8 +105,8 @@ void Port4_Init(void){
 // Output: none
 void Port5_Init(void){
   // Use the port direction register to configure pins as inputs and output
-  // 	-A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
-  // 	-A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
+  //    -A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
+  //    -A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
     P5DIR |= 0x30;
   // Use the resistor enable register to enable resistors for inputs that need them
   // Use the port output register to configure the resistors as pull-ups or pull-downs
@@ -125,8 +125,8 @@ void Port5_Init(void){
 // Output: none
 void Port6_Init(void){
   // Use the port direction register to configure pins as inputs and output
-  // 	-A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
-  // 	-A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
+  //    -A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
+  //    -A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
   // Use the resistor enable register to enable resistors for inputs that need them
   // Use the port output register to configure the resistors as pull-ups or pull-downs
   // Use the PxSEL0 and PxSEL1 registers to enable alternate pin functions, if applicable
@@ -143,8 +143,8 @@ void Port6_Init(void){
 // Output: none
 void Port7_Init(void){
   // Use the port direction register to configure pins as inputs and output
-  // 	-A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
-  // 	-A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
+  //    -A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
+  //    -A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
   // Use the resistor enable register to enable resistors for inputs that need them
   // Use the port output register to configure the resistors as pull-ups or pull-downs
   // Use the PxSEL0 and PxSEL1 registers to enable alternate pin functions, if applicable
@@ -161,8 +161,8 @@ void Port7_Init(void){
 // Output: none
 void Port8_Init(void){
   // Use the port direction register to configure pins as inputs and output
-  // 	-A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
-  // 	-A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
+  //    -A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
+  //    -A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
   // Use the resistor enable register to enable resistors for inputs that need them
   // Use the port output register to configure the resistors as pull-ups or pull-downs
   // Use the PxSEL0 and PxSEL1 registers to enable alternate pin functions, if applicable
@@ -179,12 +179,14 @@ void Port8_Init(void){
 // Output: none
 void Port9_Init(void){
   // Use the port direction register to configure pins as inputs and output
-  // 	-A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
-  // 	-A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
+  //    -A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
+  //    -A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
   P9DIR |=0x04;
   // Use the resistor enable register to enable resistors for inputs that need them
   // Use the port output register to configure the resistors as pull-ups or pull-downs
   // Use the PxSEL0 and PxSEL1 registers to enable alternate pin functions, if applicable
+  P9SEL1 &=0x00;
+  P9SEL0 |= 0x04;
   // Use the port output register to put outputs to an initial state
   P9OUT &= 0x00;
 }
@@ -199,8 +201,8 @@ void Port9_Init(void){
 // Output: none
 void Port10_Init(void){
   // Use the port direction register to configure pins as inputs and output
-  // 	-A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
-  // 	-A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
+  //    -A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
+  //    -A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
   // Use the resistor enable register to enable resistors for inputs that need them
   // Use the port output register to configure the resistors as pull-ups or pull-downs
   // Use the PxSEL0 and PxSEL1 registers to enable alternate pin functions, if applicable
@@ -217,8 +219,8 @@ void Port10_Init(void){
 // Output: none
 void PortJ_Init(void){
   // Use the port direction register to configure pins as inputs and output
-  // 	-A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
-  // 	-A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
+  //    -A 1 sets a pin as an output. Use |= with a bit mask to set 1's.
+  //    -A 0 sets a pin as an input. Use &= with a bit mask to set 0's.
   // Use the resistor enable register to enable resistors for inputs that need them
   // Use the port output register to configure the resistors as pull-ups or pull-downs
   // Use the PxSEL0 and PxSEL1 registers to enable alternate pin functions, if applicable
