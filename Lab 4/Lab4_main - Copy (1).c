@@ -71,11 +71,17 @@ void main(void)
 	WDT_A->CTL = WDT_A_CTL_PW | WDT_A_CTL_HOLD;		// stop watchdog timer
 	Clock_Init48MHz();  // makes bus clock 48 MHz
 	//call all the port initialization functions
+    Port2_Init();
+    Port3_Init();
+    Port5_Init();
+    Port9_Init();
 	//call all the timer initialization functions
-	
+    TimerA0_Init();
+    TimerA3_Init();
 	//center the servo using the ServoInit() function
 	//These are the states of the state machine
-	
+	enum motor_states {forward,backward,turn_right,sweep_right,sweep_left} state, prevState;
+
 	state = FORWARD;          //start in FORWARD state
 	prevState = !FORWARD;   //used to know when the state has changed
 	uint16_t stateTimer = 0;           //used to stay in a state
@@ -88,9 +94,69 @@ void main(void)
             prevState = state;
 	    
 	    switch (state) {
-	               
-	    } //switch 
 
-        Clock_Delay1ms(20);
+        case forward:
+        if (isNewState){
+            stateTimer = 0;
+            Motor_Forward(7599,7599);
+        }
+	    stateTimer++;
+        if (stateTimer >= 100)
+        {
+            state = backward;
+        }
+        break;
+       
+        case backward:
+        if (isNewState){
+            stateTimer = 0;
+            Motor_Backward(7599,7599);
+        }
+        stateTimer++;
+        if (stateTimer >= 25)
+        {
+            state = sweep_right;
+        }
+        break;
+
+        case sweep_right:
+        if (isNewState){
+            stateTimer = 0;
+            Motor_Stop(0,0);
+            Servo(5999);
+        }
+        stateTimer++;
+        if (stateTimer >= 2)
+        {
+            state = sweep_left;
+        }
+        break;
+
+	     case sweep_left:
+        if (isNewState){
+            stateTimer = 0;
+            Motor_Stop(0,0);
+            Servo(12000);
+        }
+        stateTimer++;
+        if (stateTimer >= 3)
+        {
+            state = turn_right;
+        }
+        break;
+
+        case turn_right:
+        if (isNewState){
+            stateTimer = 0;
+            Motor_Right(7599,7599);
+        }
+        stateTimer++;
+        if (stateTimer >= 200)
+        {
+            state = turn_right;
+        }
+        break;
+	    } //switch 
+        Clock_Delay1ms(10);
 	}  //while
 }

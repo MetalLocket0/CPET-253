@@ -30,8 +30,15 @@
 // Input: none
 // Output: none
 void Motor_Stop(void){
-   //your code here
+    P3OUT |=  ~RIGHT_MOT_SLEEP; //sleep right motor
+    P3OUT |=  ~LEFT_MOT_SLEEP;  //sleep up left motor
 
+    TA0R = 0;                  //counter, start at zero once turned on
+    TA0CCR3  = 0;      //right side high time goes in Capture/compare unit 3
+    TA0CCR4  = 0;       //left side high time goes in Capture/compare unit 4
+	
+    TA0CTL  |= 0x0010;         // start counting by setting mode to UP
+    return;
 }
 
 // ------------Motor_Forward------------
