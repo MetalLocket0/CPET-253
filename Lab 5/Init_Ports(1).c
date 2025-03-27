@@ -134,8 +134,7 @@ void Port6_Init(void){
     
     P6SEL0 &= ~(BIT2 | BIT3); 
     P6SEL1 &= ~(BIT2 | BIT3);
-    
-    P6REN |= BIT3;    
+       
     P6OUT &= ~BIT2;  
   // Use the PxSEL0 and PxSEL1 registers to enable alternate pin functions, if applicable
   // Use the port output register to put outputs to an initial state
