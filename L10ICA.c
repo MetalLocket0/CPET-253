@@ -4,3 +4,11 @@ P1OUT |= 0b00010010;
 P1IE |= 0b00010010;
 P1IES &= ~;
 P1IFG &= 
+
+
+//Kevin Leal, Cody Jones, Drew LaTerza, John Janocha
+
+
+
+
+

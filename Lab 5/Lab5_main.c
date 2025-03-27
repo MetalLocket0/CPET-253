@@ -154,9 +154,79 @@ void main(void)
 	    isNewState = (state != prevState);
             prevState = state;
 	    distance = distanceInCm();  //this needs to be moved to the states in which it is used
-	    switch (state) {  /* copy from Lab 4 and edit for Lab 5
-	               
-	    } //switch 
+        switch (state) {
+            case FORWARD:
+                if (isNewState) {
+                    stateTimer = 0;
+                    Motor_Forward(7599, 7599);
+                }
+                distance = distanceInCm();  // Measure distance while moving forward
+                if (distance < 20) {  // Stop if object is too close
+                    state = BACKWARD;
+                }
+                break;
+            
+            case BACKWARD:
+                if (isNewState) {
+                    stateTimer = 0;
+                    Motor_Backward(7599, 7599);
+                }
+                stateTimer++;
+                if (stateTimer >= 25) {
+                    state = SWEEP_RIGHT;
+                }
+                break;
+
+            case SWEEP_RIGHT:
+                if (isNewState) {
+                    stateTimer = 0;
+                    Motor_Stop();
+                    Servo(5999);  // Move servo to 90° right
+                    Clock_Delay1ms(500);
+                    right_wall = distanceInCm();  // Measure right distance
+                }
+                stateTimer++;
+                if (stateTimer >= 2) {
+                    state = SWEEP_LEFT;
+                }
+                break;
+
+            case SWEEP_LEFT:
+                if (isNewState) {
+                    stateTimer = 0;
+                    Motor_Stop();
+                    Servo(12000);  // Move servo to 90° left
+                    Clock_Delay1ms(500);
+                    left_wall = distanceInCm();  // Measure left distance
+                }
+                stateTimer++;
+                if (stateTimer >= 3) {
+                    state = (right_wall > left_wall) ? TURN_RIGHT : TURN_LEFT;  // Pick the clearer path
+                }
+                break;
+
+            case TURN_RIGHT:
+                if (isNewState) {
+                    stateTimer = 0;
+                    Motor_Right(7599, 7599);
+                }
+                stateTimer++;
+                if (stateTimer >= 100) {
+                    state = FORWARD;
+                }
+                break;
+
+            case TURN_LEFT:
+                if (isNewState) {
+                    stateTimer = 0;
+                    Motor_Left(7599, 7599);
+                }
+                stateTimer++;
+                if (stateTimer >= 100) {
+                    state = FORWARD;
+                }
+                break;
+        } 
 
         Clock_Delay1ms(20);
 	}  //while
