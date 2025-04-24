@@ -1,0 +1,77 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+SHELL = cmd.exe
+
+# Add inputs and outputs from these tool invocations to the build variables 
+CMD_SRCS += \
+../msp432p401r.cmd 
+
+C_SRCS += \
+../Clock.c \
+../CortexM.c \
+../Init_Ports(1).c \
+../Init_Timers\ -\ Copy(1).c \
+../Motor(1).c \
+../SSD1306.c \
+../final.c \
+../startup_msp432p401r_ccs.c \
+../system_msp432p401r.c 
+
+C_DEPS += \
+./Clock.d \
+./CortexM.d \
+./Init_Ports(1).d \
+./Init_Timers\ -\ Copy(1).d \
+./Motor(1).d \
+./SSD1306.d \
+./final.d \
+./startup_msp432p401r_ccs.d \
+./system_msp432p401r.d 
+
+OBJS += \
+./Clock.obj \
+./CortexM.obj \
+./Init_Ports(1).obj \
+./Init_Timers\ -\ Copy(1).obj \
+./Motor(1).obj \
+./SSD1306.obj \
+./final.obj \
+./startup_msp432p401r_ccs.obj \
+./system_msp432p401r.obj 
+
+OBJS__QUOTED += \
+"Clock.obj" \
+"CortexM.obj" \
+"Init_Ports(1).obj" \
+"Init_Timers - Copy(1).obj" \
+"Motor(1).obj" \
+"SSD1306.obj" \
+"final.obj" \
+"startup_msp432p401r_ccs.obj" \
+"system_msp432p401r.obj" 
+
+C_DEPS__QUOTED += \
+"Clock.d" \
+"CortexM.d" \
+"Init_Ports(1).d" \
+"Init_Timers - Copy(1).d" \
+"Motor(1).d" \
+"SSD1306.d" \
+"final.d" \
+"startup_msp432p401r_ccs.d" \
+"system_msp432p401r.d" 
+
+C_SRCS__QUOTED += \
+"../Clock.c" \
+"../CortexM.c" \
+"../Init_Ports(1).c" \
+"../Init_Timers - Copy(1).c" \
+"../Motor(1).c" \
+"../SSD1306.c" \
+"../final.c" \
+"../startup_msp432p401r_ccs.c" \
+"../system_msp432p401r.c" 
+
+
