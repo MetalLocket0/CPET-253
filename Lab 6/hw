@@ -1,0 +1,45 @@
+void ADC14_Init(void) {
+    P8SEL0 |= 0b10000000;
+    P8SEL1 |= 0b10000000;
+
+    ADC14CTL0 &= ~0b10;
+
+    ADC14CTL0 = 0;
+    ADC14CTL0 |= (1 << 31);
+    ADC14CTL0 |= (0b0011 << 24);
+    ADC14CTL0 |= (1 << 23);
+    ADC14CTL0 |= (0b011 << 16);
+    ADC14CTL0 |= (0b11 << 12);
+    ADC14CTL0 |= (0b100 << 8);
+
+    ADC14CTL1 = 0;
+    ADC1CTL1 |= (8 << 16);
+
+    ADC14MCTL[8] = 22;
+
+    ADC14CTL0 |= 0b10;
+}
+
+uint8_t Read_ADC(void) {
+    ADC14CTL0 |= 0b1;
+    while ((ADC14IFGR0 & (1 << 8)) == 0);
+    return ADC14MEM[8];
+}
+
+void Port7_Init(void) {
+    P7DIR = 0b11111111;
+    P7OUT = 0;
+}
+
+int main(void) {
+	WDT_A->CTL = WDT_A_CTL_PW | WDT_A_CTL_HOLD;		// stop watchdog timer
+	Clock_Init48MHz();  // makes bus clock 48 MHz
+
+    ADC14_Init();
+    Port7_Init();
+
+    while (1) {
+        uint8_t value = Read_ADC();  
+        P7OUT = value;             
+    }
+}
